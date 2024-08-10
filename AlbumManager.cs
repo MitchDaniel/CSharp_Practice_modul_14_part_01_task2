@@ -9,11 +9,28 @@ namespace Task2
 {
     internal static class AlbumManager
     {
-        public static string Serialize(Album albums)
+        public static string Serialize(Album album)
+        {
+            if(album is null) throw new ArgumentNullException(nameof(album));
+
+            return JsonSerializer.Serialize(album);
+        }
+
+        public static Album[] DeserializeAlboms(string json)
+        {
+            if (json is null) throw new ArgumentNullException(nameof(json));
+            return JsonSerializer.Deserialize<Album[]>(json) ?? throw new JsonException();
+        }
+
+        public static string Serialize(params Album[] albums)
         {
             if(albums is null) throw new ArgumentNullException(nameof(albums));
-
-            return JsonSerializer.Serialize(albums);
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (Album album in albums)
+            {
+                stringBuilder.Append(JsonSerializer.Serialize(album));
+            }
+            return stringBuilder.ToString();
         }
 
         public static void Save(string json, string path)
@@ -34,11 +51,7 @@ namespace Task2
             return Encoding.UTF8.GetString(bytes) ?? throw new JsonException();
         }
 
-        public static Album Deserialize(string json)
-        {
-            if(json is null) throw new ArgumentNullException(nameof(json));
-            return JsonSerializer.Deserialize<Album>(json);
-        }
+
     }
 }
 //У программы должна быть такая функциональность:

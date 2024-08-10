@@ -15,7 +15,6 @@ namespace Task2
     [JsonObject]
     internal class Album 
     {
-        [JsonInclude]
         List<Song> _songs = new List<Song>();
 
         public Album() {    }

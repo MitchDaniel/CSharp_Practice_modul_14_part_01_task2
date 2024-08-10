@@ -1,4 +1,6 @@
-﻿namespace Task2
+﻿using System.Diagnostics.Metrics;
+
+namespace Task2
 {
     internal class Program
     {
@@ -9,14 +11,23 @@
             //albums[1] = new Album("Westworld", "Ramin Djawadi", 2016, new TimeOnly(1, 49), "WB");
             //albums[2] = new Album("The rise and Fall of Ziggy Sturdus and the Spiders from Mars", "David Bowie", 1972, new TimeOnly(0, 38), "WB");
 
-
+            //albums[0].Add(new Song("Fever", new TimeOnly(0, 3, 13), "Indy"), new Song("Bullet in the brain", new TimeOnly(0, 3, 13), "Indy"));
+            //albums[1].Add(new Song("Dr. Ford", new TimeOnly(0, 5, 30), "SoundTrack"), new Song("Bicameral Mind", new TimeOnly(0, 4, 26), "SoundTrack"));
+            //albums[2].Add(new Song("Moonage Daydream", new TimeOnly(0, 4, 40), "Rock"));
+            //AlbumManager.Save(AlbumManager.Serialize(albums), @"C:\Users\Brill\Desktop\Четотам 2.json");
             //Album album = new Album("Turn Blue", "The Black Keys", 2014, new TimeOnly(0, 45), "WB");
             //album.Add(new Song("Fever", new TimeOnly(0, 3, 13), "Indy"), new Song("Bullet in the brain", new TimeOnly(0, 3, 13), "Indy"));
             //AlbumManager.Save(AlbumManager.Serialize(album), @"C:\Users\Brill\Desktop\Четотам.json");
-            Album album1 = AlbumManager.Deserialize(AlbumManager.Load(@"C:\Users\Brill\Desktop\Четотам.json"));
-            foreach (var songs in album1.Songs)
+            //Album album1 = AlbumManager.Deserialize(AlbumManager.Load(@"C:\Users\Brill\Desktop\Четотам.json"));
+            //foreach (var songs in album1.Songs)
+            //{
+            //    Console.WriteLine(songs.ToString());
+            //}
+            Album[] albums = AlbumManager.DeserializeAlboms(AlbumManager.Load(@"C:\Users\Brill\Desktop\Четотам 2.json"));
+            foreach (Album album in albums)
             {
-                Console.WriteLine(songs.ToString());
+                Console.WriteLine(album.Name);
+                Console.WriteLine(album.Songs);
             }
         }
     }

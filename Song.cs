@@ -14,11 +14,18 @@ namespace Task2
 
         public string Style { set; get; }   
 
+        public Song() { }
+
         public Song(string name, TimeOnly duraion, string  style) 
         {
             Name = name;
             Duration = duraion;
             Style = style;
+        }
+
+        public override string ToString()
+        {
+            return Name + " " + Duration + " " + Style;
         }
     }
 }

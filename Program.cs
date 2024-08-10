@@ -14,7 +14,10 @@
             //album.Add(new Song("Fever", new TimeOnly(0, 3, 13), "Indy"), new Song("Bullet in the brain", new TimeOnly(0, 3, 13), "Indy"));
             //AlbumManager.Save(AlbumManager.Serialize(album), @"C:\Users\Brill\Desktop\Четотам.json");
             Album album1 = AlbumManager.Deserialize(AlbumManager.Load(@"C:\Users\Brill\Desktop\Четотам.json"));
-
+            foreach (var songs in album1.Songs)
+            {
+                Console.WriteLine(songs.ToString());
+            }
         }
     }
 }

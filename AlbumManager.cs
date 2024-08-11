@@ -13,7 +13,13 @@ namespace Task2
         {
             if(album is null) throw new ArgumentNullException(nameof(album));
 
-            return JsonSerializer.Serialize(album);
+            return JsonSerializer.Serialize(album) ?? throw new JsonException();
+        }
+        public static string Serialize(Album[] albums)
+        {
+            if (albums is null) throw new ArgumentNullException(nameof(albums));
+            ;
+            return JsonSerializer.Serialize(albums) ?? throw new JsonException();
         }
 
         public static Album[] DeserializeAlboms(string json)
@@ -22,16 +28,13 @@ namespace Task2
             return JsonSerializer.Deserialize<Album[]>(json) ?? throw new JsonException();
         }
 
-        public static string Serialize(params Album[] albums)
+        public static Album Deserialize(string json)
         {
-            if(albums is null) throw new ArgumentNullException(nameof(albums));
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (Album album in albums)
-            {
-                stringBuilder.Append(JsonSerializer.Serialize(album));
-            }
-            return stringBuilder.ToString();
+            if (json is null) throw new ArgumentNullException(nameof(json));
+            return JsonSerializer.Deserialize<Album>(json) ?? throw new JsonException();
         }
+
+
 
         public static void Save(string json, string path)
         {
